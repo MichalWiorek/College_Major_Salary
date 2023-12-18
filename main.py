@@ -29,7 +29,7 @@ for i in range(1, total_pages+1):
         for element in row:
             value = element.select_one(selector="span.data-table__value")
             if value.text.strip("$") != value.text:
-                values.append(int(value.text.strip("$").replace(",", "")))
+                values.append(float(value.text.strip("$").replace(",", "")))
             else:
                 values.append(value.text)
         all_values.append(values)
@@ -38,6 +38,7 @@ for i in range(1, total_pages+1):
 df = pd.DataFrame(data=all_values, columns=headers)
 clean_df = df.dropna()
 # print(clean_df.info())
+pd.options.display.float_format = '${:,.2f}'.format
 
 print("\nMax Early Career pay: ")
 print(clean_df[["Major", "Early Career Pay"]].sort_values("Early Career Pay", ascending=False).head())
