@@ -38,3 +38,8 @@ for i in range(1, total_pages+1):
 df = pd.DataFrame(data=all_values, columns=headers)
 clean_df = df.dropna()
 # print(clean_df.info())
+
+print("\nMax Early Career pay: ")
+print(clean_df[["Major", "Early Career Pay"]].sort_values("Early Career Pay", ascending=False).head())
+print("\nMax Mid-Career pay: ")
+print(clean_df[["Major", "Mid-Career Pay"]].sort_values("Mid-Career Pay", ascending=False).head())
