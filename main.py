@@ -28,9 +28,13 @@ for i in range(1, total_pages+1):
         values = []
         for element in row:
             value = element.select_one(selector="span.data-table__value")
-            values.append(value.text)
+            if value.text.strip("$") != value.text:
+                values.append(int(value.text.strip("$").replace(",", "")))
+            else:
+                values.append(value.text)
         all_values.append(values)
-        print(values)
+        # print(values)
 
 df = pd.DataFrame(data=all_values, columns=headers)
-print(df.info())
+clean_df = df.dropna()
+# print(clean_df.info())
