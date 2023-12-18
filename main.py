@@ -32,3 +32,5 @@ for i in range(1, total_pages+1):
         all_values.append(values)
         print(values)
 
+df = pd.DataFrame(data=all_values, columns=headers)
+print(df.info())
